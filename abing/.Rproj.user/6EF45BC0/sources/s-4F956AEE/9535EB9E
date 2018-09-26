@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537931386745.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9535EB9E",
+    "lastKnownWriteTime" : 1536133941,
+    "last_content_update" : 1536133941,
+    "path" : "E:/医惠科技/脓毒血症/sepsis-prediction-R/src-R/step3_fill_timeline-R2.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "7,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,699 @@
+---
+title: 不R第一次交流材料
+author: abing
+date: '2018-09-26'
+slug: 不R编程
+categories:
+  - R
+tags:
+  - R Markdown
+---
+
+
+# 向量
+
+向量是R语言中最基本的数据类型，分为数值型、字符型、逻辑值型和复数型。
+
+## 向量类型
+
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+lanshiren
+mode(lanshiren)  #类型
+lan<-c(1,2,4,6)   #数值型向量
+lan
+mode(lan)  #类型
+la<-c(TRUE,FALSE,TRUE)
+la
+mode(la) #类型
+```
+
+## 向量索引
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+
+lanshiren[1]  #用方括号查看元素，注意下标从1开始计算
+lanshiren[c(1,3)]  #方括号里可以指定哪几个
+lanshiren[-c(1,3)] #负号表示过滤掉
+
+names(lanshiren)<-c("yulu","jingjing","yaomei","zhongkunan","wushuang","rexue") #命名
+lanshiren[c("yulu","rexue")] #查看名称相应的元素
+
+```
+
+### which索引
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+which(lanshiren=="无双")
+which(lanshiren!="无双")
+
+vc<-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+vc
+mode(vc)
+is.vector(vc) #is.vector判定是否为向量
+which.max(vc) #最大值所在位置
+which.min(vc) #最小值所在位置
+
+```
+
+### subset索引
+```{r}
+
+vc<-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+subset(vc,vc>3&vc<12) #返回满足条件的元素
+
+```
+
+### match索引
+```{r}
+
+vc<-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+match(vc,c(1,5)) #判断元素是否等于1或者5
+match(lanshiren,c("幺妹","中裤男")) 
+
+```
+
+
+
+### %in% 索引
+```{r}
+
+vc<-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+c(1,25) %in% vc #vc是否包含某些元素
+c("幺妹","中裤男") %in% lanshiren 
+
+```
+
+
+## 向量编辑
+```{r}
+
+vc<-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+vc<-c(vc,seq(1:3))
+vc
+vc<-vc[-1]  #注意此时把1位置的元素删掉
+vc
+vc<-vc[-length(vc)]  #删除最后一个元素
+vc
+vc<-vc[-c(1,2,4)] #表示把1，2，4的位置删掉
+vc
+```
+
+## 向量排序
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+vc<-c(3,8,7,4,1,9,6)
+vcn<-c(3,8,7,4,1,NA,9,6)
+sort(lanshiren,decreasing = TRUE) #此为降序，默认FALSE则为升序
+sort(vcn,na.last = TRUE,decreasing = TRUE) #na.last = TRUE表示放在最后面
+rev(vcn) #倒序，倒过来
+```
+
+## rep函数
+rep函数用于创建重复序列，在构建初始的向量很有作用。
+```{r}
+rep(NA,3)  #构建长度为3的NA向量
+
+rep(5:7,2) #重复序列2次
+rep(5:7,each=2) #序列每个元素分别重复2次
+rep(5:7,each=2,time=2) #序列每个元素分别重复2次，序列重复2次
+```
+
+
+
+# 矩阵
+矩阵内的每个元素拥有相同的模式。
+
+## 矩阵的创建
+
+matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,dimnames = NULL)
+data:矩阵元素
+nrow:行维数
+ncol:列维数
+byrow:FALSE默认表示按行填充，TRUE表示按列填充
+dimnames:用字符向量表示行名和列名
+
+
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+lanmatrix<-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c("a1","a2","a3"),c("b1","b2")))
+lanmatrix
+```
+
+## 矩阵转化为向量
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+lanmatrix<-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c("a1","a2","a3"),c("b1","b2")))
+lanvc<-as.vector(lanmatrix)
+lanvc
+```
+
+
+
+## 矩阵索引
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+lanmatrix<-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c("a1","a2","a3"),c("b1","b2")))
+lanmatrix[2,1]  #根据位置索引
+lanmatrix["a1","b1"] #根据行名列名索引
+lanmatrix["a1",] #索引行名a1的行
+lanmatrix[,"b1"] #索引列名b1的列
+lanmatrix[c(2,3),] #索引2，3行
+
+```
+
+## 矩阵编辑
+矩阵的操作之中最重要的就是rbind()函数和cbind()函数，前者是纵向拼接，后者是横向拼接矩阵。
+```{r}
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+lanmatrix<-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c("a1","a2","a3"),c("b1","b2")))
+lanshiren1<-rbind(lanmatrix,c("道长","苹果"))
+lanshiren1
+lanshiren2<-cbind(lanmatrix,c("道长","苹果","吉光"))
+lanshiren2
+```
+
+
+
+
+## 矩阵运算
+
+```{r}
+a<-c(1,2,3,4,5,2,3,7,10,13,3,5,11,16,21,
+     2,-7,7,7,2,1,4,5,3,10)
+m1<-matrix(a,ncol=5)
+m1
+m2<-matrix(c(25:1),nrow = 5)
+m2
+colSums(m1) #各列求和
+rowSums(m2) #各行求和
+
+t(m2) #转置
+det(m1) #求解行列式=52
+crossprod(m1,m2) #内积,等价于t(m1)%*% m2
+t(m1)%*% m2
+solve(m1) #逆矩阵
+eigen(m1) #特征值，特征向量
+
+```
+
+# 数据框
+
+数据框不同的列可以包含不同的模式(数值型、字符型，逻辑值型等)。
+
+数据框所有列的长度必须相同。
+
+一般列表示属性的所有取值，行表示其中一个样本数据。
+
+## 创建数据框
+
+
+```{r}
+a<-c(1,2,3,4,5,2,3,7,10,13,3,5,11,16,21,
+     2,-7,7,7,2,1,4,5,3,10)
+m1<-matrix(a,ncol=5)
+m1
+dt1<-data.frame(m1) #矩阵转化为数据框
+dt1
+dt2<-data.frame(t=c(2013,2014,2015,2016,2017,2018),
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+dt2
+```
+
+## 数据框索引
+
+### 列(行)索引
+
+
+```{r}
+
+dt2<-data.frame(t=c(2013,2014,2015,2016,2017,2018),
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+
+dt2[,2] #索引第二列
+
+dt2$sz #按列名称索引，注意$符号,这种方式很重要
+
+dt2["sz"] #按列名称索引
+
+dt2[2:4,] #索引2:4行
+
+
+```
+
+### 元素索引
+
+
+```{r}
+
+dt2<-data.frame(t=c(2013,2014,2015,2016,2017,2018),
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+
+dt2[1,2] #索引第一行第二列值
+dt2[1,][2] #先索引行然后再索引该行第二个值，跟上面一样结果
+
+dt2$sz[1] #按列索引然后再索引该列第一个值
+
+dt2["sz"][[1]] #跟上面一样结果
+
+
+```
+
+
+## 数据框编辑和查看
+跟之前的矩阵操作有些类似
+
+
+```{r}
+
+dt2<-data.frame(t=c(2013,2014,2015,2016,2017,2018), 
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+
+dt2
+
+dt3<-rbind(dt2,c(2019,7,34.5)) #增加一行
+dt3
+
+dt3<-dt3[,-3] #删除一列
+dt3
+
+
+dt4<-cbind(dt2,cn=c("a","b","c","d","e","f")) #增加一列
+dt4
+
+names(dt4) #查看数据框列名
+
+names(dt4)[4]="cnm" #修改数据框列名
+names(dt4) #查看数据框列名
+
+nrow(dt4) #查看行数目
+
+ncol(dt4) #查看列数目
+
+summary(dt4) #查看数据框概貌
+
+```
+
+
+
+# 列表
+列表可以把向量，矩阵，数据框甚至列表等整合在一起。
+
+
+```{r}
+a<-c(1,2,3,4,5,2,3,7,10,13,3,5,11,16,21,
+     2,-7,7,7,2,1,4,5,3,10) #向量
+m1<-matrix(a,ncol=5) #矩阵
+dt2<-data.frame(t=c(2013,2014,2015,2016,2017,2018),sz=c(2,5,8,9,3,4)) #数据框
+list1<-list(a=a,m1=m1,dt2=dt2,lanshiren=lanshiren)
+list1
+
+```
+
+
+# 控制流
+
+## 分支语句
+
+### if/else语句
+注意else不能单独一行，除非if/else在大括号{}里面。
+
+if(cond) expr
+
+if(cond) cons.expr  else  alt.expr
+
+
+```{r}
+a<-27
+if(a<=28){print("天气凉爽")} else  print("天气热")
+
+```
+
+
+
+### switch语句
+switch(EXPR, LIST)
+
+EXPR:表达式
+
+LIST:
+
+1,当LIST是字典类型时，表达式等于变量名，返回变量名相应的值。
+
+2,如果表达式返回值在1到length(LIST)之间，则返回列表相应位置的值。
+
+
+```{r}
+
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+switch("yulu",yulu="雨露",jingjing="静静",yaomei="幺妹",zhongkunan="中裤男") 
+
+a<-c(1,2,3)
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+switch(2,a) #相应位置的值为，为NULL
+switch(2,a,lanshiren) #相应位置的值
+
+```
+## 循环语句
+
+### for 循环
+
+格式:for(name in expr1){expr2}
+
+
+```{r}
+
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+for(i in  lanshiren)
+{
+  print(i)
+}
+
+for(n in c(2,5,10,20,50)) {
+   x <- stats::rnorm(n)
+   cat(n, ": ", sum(x^2), "\n", sep = "")
+}
+```
+
+
+### while 循环
+
+格式:while(cond){expr}
+
+
+```{r}
+fa<-c(1,1)
+i=3
+while(i <=8)
+{
+  fa[i]<-fa[i-1]+fa[i-2]
+  i<-i+1
+}
+fa
+```
+
+### repeat-break 循环
+
+repeat是无限循环语句，循环条件很重要。
+
+
+```{r}
+fa<-c(1,1)
+i=3
+repeat
+{
+  fa[i]<-fa[i-1]+fa[i-2]
+  i<-i+1
+  if(i>8) break  #循环条件
+}
+fa
+```
+
+
+# 函数
+函数的定义格式为：
+name<-function(arg1,arg2,...) expression
+
+
+
+```{r}
+# 二分法求解[a,b]区间 函数f的根。
+ff<-function(f,a,b,eps=1e-5){
+  if(f(a)*f(b)>0)
+    list(fail="finding root is fail !")
+  else{
+    repeat{
+      if(abs(b-a)<eps) break
+      x<-(a+b)/2
+      if(f(a)*f(x)<=0) b<-x else a<-x #注意，若取<时候最后区间[0,2]有不可思议结果
+    }
+  list(root=(a+b)/2,fun=f(x))
+  }
+}
+f<-function(x) x^3-1
+ff(f,0,3)
+
+```
+
+# 字符串操作
+字符串的操作在后续的爬虫之中是很重要的。
+
+## sub()函数和gsub()函数
+sub替换第一个满足条件的匹配。
+
+sub(pattern, replacement, x, ignore.case = FALSE, perl = FALSE,
+    fixed = FALSE, useBytes = FALSE)
+
+gsub替换所有满足条件的匹配。
+
+gsub(pattern, replacement, x, ignore.case = FALSE, perl = FALSE,
+     fixed = FALSE, useBytes = FALSE)
+
+
+
+```{r}
+
+st<-c("aaa","bba","abcd")  #字符型向量
+st
+st1<-sub('a','l',st) #替换第一个满足条件的
+st1 
+st2<-gsub('a','l',st) #替换所有满足条件的
+st2 
+
+
+```
+
+## strsplit()函数
+字符串拆分
+
+strsplit(x, split, fixed = FALSE, perl = FALSE, useBytes = FALSE)
+
+fixed: FALSE则split要为正则表达式。若TRUE则split为文本字符串。
+
+
+```{r}
+
+st<-c("2018年4月28日","2018年4月29日")  #字符型向量
+strsplit(st,"年")
+
+
+```
+
+
+## paste()函数
+在我看来，paste函数是R语言最神奇的函数之一了。用于字符串连接。在解决路径拼接等很有用。
+
+paste (..., sep = " ", collapse = NULL)
+
+sep:默认为空格，实际在用中经常改变。
+
+collapse:若缺省，则返回的是字符型向量。若指定，则连接后的字符串向量用指定值分割连接成字符串。实际操作中此参数比较少用。
+
+
+```{r}
+
+lanshiren<-c("雨露","静静","幺妹","中裤男","无双","热血")  #字符型向量
+paste(lanshiren,"烂诗人",1:length(lanshiren),sep="-")
+paste("E://不R编程小组资料","云词.R",sep = "//")
+```
+
+
+# 数据文件读写
+
+## read.csv()
+
+read.csv(file, header = TRUE, sep = ",", quote = "\"",
+         dec = ".", fill = TRUE, comment.char = "", ...)
+         
+         
+
+```{r}
+
+
+# file:文件路径名,注意windows下用/或者//来表示路径
+# header:TRUE的时候文件第一行为变量名
+# sep:文件中字段分割符，默认为","
+
+
+```
+
+
+
+
+## write.csv()
+
+write.csv(x,file,row.names = TRUE,col.names = TRUE) # 部分参数
+
+
+```{r}
+
+
+# x:要写入的文件
+# file:写入的文件路径
+# row.names:若不需要行名可以注释掉,col.names一样
+
+
+```
+
+
+
+# 豆瓣爬虫
+线下结合具体的代码讲解如何抓取豆瓣top250电影。
+
+## rvest包
+
+%>%是管道操作符，意思是把左边的操作结果作为参数传递给右边的命令
+
+html_nodes()用于获取网页上的指定节点信息或者元素，确定抓取范围
+
+html_text()用于提取文本内容
+
+html_attrs()用于获取链接
+
+## xml2包
+
+若加载rvest包，该过程会自动加载xml2包
+
+read_html:读取HTML或者XML。
+
+read_html(x, encoding = "", ..., options = c("RECOVER", "NOERROR",
+  "NOBLANKS"))
+  
+## stringr包
+此包处理字符串功能强大。这次暂时没用到。
+
+
+
+# 云词
+具体线下结合例子说明。
+
+## readLines
+readLines(con = stdin(), n = -1L, ok = TRUE, warn = TRUE,
+          encoding = "unknown", skipNul = FALSE)
+
+可读取txt文件
+
+
+## jiebaR包
+
+### work()函数
+分词首先要使用work()函数初始化分词引擎。
+
+### segment()函数
+绘图有个segments函数，注意不要搞混淆了。分词初始化引擎后，可以用segment()函数进行分词。
+也可以用分词运算符号"<="
+
+segment(code, jiebar, mod = NULL)
+
+
+code:A Chinese sentence or the path of a text file.
+
+code为中文句子或者是文本文档路径
+
+jiebar:jiebaR Worker.
+
+jiebar为jiebaR分词引擎。
+
+mod:change default result type, value can be "mix","hmm","query","full","level", or "mp".
+
+mod可改变默认的分词引擎，默认是"mix"引擎。
+
+
+```{r}
+
+
+library(jiebaR)
+mixworker<-worker()
+zju<-"浙江大学，简称浙大，坐落于素有“人间天堂”美誉的历史文化名城杭州。
+前身是1897年创建的求是书院，是中国人自己最早创办的现代高等学府之一。"
+mixworker <= zju  #分词运算符号"<="
+segment(zju,mixworker) #与上面结果一样
+dt=(mixworker <= zju)  #分词运算符号"<="
+dt
+
+
+```
+
+
+## wordcloud2包
+
+注意直接用  install.packages() 有问题，要用下面的安装：
+
+devtools::install_github("lchiffon/wordcloud2")。
+
+因此要先装devtools包。
+
+### wordcloud2()函数
+wordcloud2(data, size = 1, minSize = 0, gridSize =  0,
+    fontFamily = 'Segoe UI', fontWeight = 'bold',
+    color = 'random-dark', backgroundColor = "white",
+    minRotation = -pi/4, maxRotation = pi/4, shuffle = TRUE,
+    rotateRatio = 0.4, shape = 'circle', ellipticity = 0.65,
+    widgetsize = NULL, figPath = NULL, hoverFunction = NULL)
+
+常用参数：
+
+（1）data：词云生成数据，包含具体词语以及频率；
+
+（2）size：字体大小，默认为1，一般来说该值越小，生成的形状轮廓越明显；
+
+（3）fontFamily：字体，如‘微软雅黑’；
+
+（4）fontWeight：字体粗细，包含‘normal’，‘bold’以及‘600’;
+
+（5）color：字体颜色，可以选择‘random-dark’以及‘random-light’，其实就是颜色色系；
+
+（6）backgroundColor：背景颜色，支持R语言中的常用颜色，如‘gray’，‘blcak’，但是还支持不了更加具体的颜色选择，如‘gray20’；
+
+（7）minRontatin与maxRontatin：字体旋转角度范围的最小值以及最大值，选定后，字体会在该范围内随机旋转；
+
+（8）rotationRation：字体旋转比例，如设定为1，则全部词语都会发生旋转；
+
+（9）shape：词云形状选择，默认是‘circle’，即圆形。还可以选择‘cardioid’（苹果形或心形），‘star’（星形），‘diamond’（钻石），‘triangle-forward’（三角形），‘triangle’（三角形），‘pentagon’（五边形）。
+
+
+
+```{r,eval=FALSE}
+
+library(wordcloud2) 
+
+wordcloud2(demoFreq, size = 1,shape = 'star')   # 星星图
+
+wordcloud2(demoFreqC, size = 2, fontFamily = "微软雅黑",  
+           color = "random-light", backgroundColor = "grey")  #中文词云
+
+wordcloud2(demoFreqC, size = 1,color = 'random-light',  
+backgroundColor = "gray", fontWeight='bold',fontFamily = "微软雅黑",  
+minRotation = -pi/3, maxRotation = pi/3,rotateRatio = 0.8)  #中文词云
+#设定字体为粗体，字体旋转角度在正负60度之间，旋转比例为80%
+
+```
+
+
+
+### letterCloud()函数
+
+
+
+
+letterCloud(data, word, wordSize = 0, letterFont = NULL, ...)
+
+```{r}
+#data:为需要用的词语以及词频数据
+
+#word:是需要可视化的文字 
+
+```
+
+
+```{r,eval=FALSE}
+library(wordcloud2) 
+letterCloud(demoFreq,"R")
+
+```
+
+

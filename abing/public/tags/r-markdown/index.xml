@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on A Hugo website</title>
+    <link>/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>不R第一次交流材料</title>
+      <link>/2018/09/26/%E4%B8%8Dr%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Wed, 26 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/26/%E4%B8%8Dr%E7%BC%96%E7%A8%8B/</guid>
+      <description>向量 向量是R语言中最基本的数据类型，分为数值型、字符型、逻辑值型和复数型。
+向量类型 lanshiren&amp;lt;-c(&amp;quot;雨露&amp;quot;,&amp;quot;静静&amp;quot;,&amp;quot;幺妹&amp;quot;,&amp;quot;中裤男&amp;quot;,&amp;quot;无双&amp;quot;,&amp;quot;热血&amp;quot;) #字符型向量 lanshiren ## [1] &amp;quot;雨露&amp;quot; &amp;quot;静静&amp;quot; &amp;quot;幺妹&amp;quot; &amp;quot;中裤男&amp;quot; &amp;quot;无双&amp;quot; &amp;quot;热血&amp;quot; mode(lanshiren) #类型 ## [1] &amp;quot;character&amp;quot; lan&amp;lt;-c(1,2,4,6) #数值型向量 lan ## [1] 1 2 4 6 mode(lan) #类型 ## [1] &amp;quot;numeric&amp;quot; la&amp;lt;-c(TRUE,FALSE,TRUE) la ## [1] TRUE FALSE TRUE mode(la) #类型 ## [1] &amp;quot;logical&amp;quot;  向量索引 lanshiren&amp;lt;-c(&amp;quot;雨露&amp;quot;,&amp;quot;静静&amp;quot;,&amp;quot;幺妹&amp;quot;,&amp;quot;中裤男&amp;quot;,&amp;quot;无双&amp;quot;,&amp;quot;热血&amp;quot;) #字符型向量 lanshiren[1] #用方括号查看元素，注意下标从1开始计算 ## [1] &amp;quot;雨露&amp;quot; lanshiren[c(1,3)] #方括号里可以指定哪几个 ## [1] &amp;quot;雨露&amp;quot; &amp;quot;幺妹&amp;quot; lanshiren[-c(1,3)] #负号表示过滤掉 ## [1] &amp;quot;静静&amp;quot; &amp;quot;中裤男&amp;quot; &amp;quot;无双&amp;quot; &amp;quot;热血&amp;quot; names(lanshiren)&amp;lt;-c(&amp;quot;yulu&amp;quot;,&amp;quot;jingjing&amp;quot;,&amp;quot;yaomei&amp;quot;,&amp;quot;zhongkunan&amp;quot;,&amp;quot;wushuang&amp;quot;,&amp;quot;rexue&amp;quot;) #命名 lanshiren[c(&amp;quot;yulu&amp;quot;,&amp;quot;rexue&amp;quot;)] #查看名称相应的元素 ## yulu rexue ## &amp;quot;雨露&amp;quot; &amp;quot;热血&amp;quot; which索引 lanshiren&amp;lt;-c(&amp;quot;雨露&amp;quot;,&amp;quot;静静&amp;quot;,&amp;quot;幺妹&amp;quot;,&amp;quot;中裤男&amp;quot;,&amp;quot;无双&amp;quot;,&amp;quot;热血&amp;quot;) #字符型向量 which(lanshiren==&amp;quot;无双&amp;quot;) ## [1] 5 which(lanshiren!</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/2015/07/23/hello-r-markdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/2015/07/23/hello-r-markdown/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+  </channel>
+</rss>

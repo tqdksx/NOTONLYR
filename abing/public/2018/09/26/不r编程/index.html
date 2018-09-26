@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.49" />
+
+
+<title>不R第一次交流材料 - A Hugo website</title>
+<meta property="og:title" content="不R第一次交流材料 - A Hugo website">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">11 min read</span>
+    
+
+    <h1 class="article-title">不R第一次交流材料</h1>
+
+    
+    <span class="article-date">2018/09/26</span>
+    
+
+    <div class="article-content">
+      <div class="section level1">
+<h1>向量</h1>
+<p>向量是R语言中最基本的数据类型，分为数值型、字符型、逻辑值型和复数型。</p>
+<div class="section level2">
+<h2>向量类型</h2>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+lanshiren</code></pre>
+<pre><code>## [1] &quot;雨露&quot;   &quot;静静&quot;   &quot;幺妹&quot;   &quot;中裤男&quot; &quot;无双&quot;   &quot;热血&quot;</code></pre>
+<pre class="r"><code>mode(lanshiren)  #类型</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>lan&lt;-c(1,2,4,6)   #数值型向量
+lan</code></pre>
+<pre><code>## [1] 1 2 4 6</code></pre>
+<pre class="r"><code>mode(lan)  #类型</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>la&lt;-c(TRUE,FALSE,TRUE)
+la</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code>mode(la) #类型</code></pre>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+</div>
+<div class="section level2">
+<h2>向量索引</h2>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+
+lanshiren[1]  #用方括号查看元素，注意下标从1开始计算</code></pre>
+<pre><code>## [1] &quot;雨露&quot;</code></pre>
+<pre class="r"><code>lanshiren[c(1,3)]  #方括号里可以指定哪几个</code></pre>
+<pre><code>## [1] &quot;雨露&quot; &quot;幺妹&quot;</code></pre>
+<pre class="r"><code>lanshiren[-c(1,3)] #负号表示过滤掉</code></pre>
+<pre><code>## [1] &quot;静静&quot;   &quot;中裤男&quot; &quot;无双&quot;   &quot;热血&quot;</code></pre>
+<pre class="r"><code>names(lanshiren)&lt;-c(&quot;yulu&quot;,&quot;jingjing&quot;,&quot;yaomei&quot;,&quot;zhongkunan&quot;,&quot;wushuang&quot;,&quot;rexue&quot;) #命名
+lanshiren[c(&quot;yulu&quot;,&quot;rexue&quot;)] #查看名称相应的元素</code></pre>
+<pre><code>##   yulu  rexue 
+## &quot;雨露&quot; &quot;热血&quot;</code></pre>
+<div id="which" class="section level3">
+<h3>which索引</h3>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+which(lanshiren==&quot;无双&quot;)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>which(lanshiren!=&quot;无双&quot;)</code></pre>
+<pre><code>## [1] 1 2 3 4 6</code></pre>
+<pre class="r"><code>vc&lt;-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+vc</code></pre>
+<pre><code>## [1]  1  3  5  7  9 11 13 15</code></pre>
+<pre class="r"><code>mode(vc)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>is.vector(vc) #is.vector判定是否为向量</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>which.max(vc) #最大值所在位置</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>which.min(vc) #最小值所在位置</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="subset" class="section level3">
+<h3>subset索引</h3>
+<pre class="r"><code>vc&lt;-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+subset(vc,vc&gt;3&amp;vc&lt;12) #返回满足条件的元素</code></pre>
+<pre><code>## [1]  5  7  9 11</code></pre>
+</div>
+<div id="match" class="section level3">
+<h3>match索引</h3>
+<pre class="r"><code>vc&lt;-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+match(vc,c(1,5)) #判断元素是否等于1或者5</code></pre>
+<pre><code>## [1]  1 NA  2 NA NA NA NA NA</code></pre>
+<pre class="r"><code>match(lanshiren,c(&quot;幺妹&quot;,&quot;中裤男&quot;)) </code></pre>
+<pre><code>## [1] NA NA  1  2 NA NA</code></pre>
+</div>
+<div id="in-" class="section level3">
+<h3>%in% 索引</h3>
+<pre class="r"><code>vc&lt;-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+c(1,25) %in% vc #vc是否包含某些元素</code></pre>
+<pre><code>## [1]  TRUE FALSE</code></pre>
+<pre class="r"><code>c(&quot;幺妹&quot;,&quot;中裤男&quot;) %in% lanshiren </code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>向量编辑</h2>
+<pre class="r"><code>vc&lt;-seq(from = 1,to=15,by=2)  #用seq也可以创建向量
+vc&lt;-c(vc,seq(1:3))
+vc</code></pre>
+<pre><code>##  [1]  1  3  5  7  9 11 13 15  1  2  3</code></pre>
+<pre class="r"><code>vc&lt;-vc[-1]  #注意此时把1位置的元素删掉
+vc</code></pre>
+<pre><code>##  [1]  3  5  7  9 11 13 15  1  2  3</code></pre>
+<pre class="r"><code>vc&lt;-vc[-length(vc)]  #删除最后一个元素
+vc</code></pre>
+<pre><code>## [1]  3  5  7  9 11 13 15  1  2</code></pre>
+<pre class="r"><code>vc&lt;-vc[-c(1,2,4)] #表示把1，2，4的位置删掉
+vc</code></pre>
+<pre><code>## [1]  7 11 13 15  1  2</code></pre>
+</div>
+<div class="section level2">
+<h2>向量排序</h2>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+vc&lt;-c(3,8,7,4,1,9,6)
+vcn&lt;-c(3,8,7,4,1,NA,9,6)
+sort(lanshiren,decreasing = TRUE) #此为降序，默认FALSE则为升序</code></pre>
+<pre><code>## [1] &quot;中裤男&quot; &quot;雨露&quot;   &quot;幺妹&quot;   &quot;无双&quot;   &quot;热血&quot;   &quot;静静&quot;</code></pre>
+<pre class="r"><code>sort(vcn,na.last = TRUE,decreasing = TRUE) #na.last = TRUE表示放在最后面</code></pre>
+<pre><code>## [1]  9  8  7  6  4  3  1 NA</code></pre>
+<pre class="r"><code>rev(vcn) #倒序，倒过来</code></pre>
+<pre><code>## [1]  6  9 NA  1  4  7  8  3</code></pre>
+</div>
+<div id="rep" class="section level2">
+<h2>rep函数</h2>
+<p>rep函数用于创建重复序列，在构建初始的向量很有作用。</p>
+<pre class="r"><code>rep(NA,3)  #构建长度为3的NA向量</code></pre>
+<pre><code>## [1] NA NA NA</code></pre>
+<pre class="r"><code>rep(5:7,2) #重复序列2次</code></pre>
+<pre><code>## [1] 5 6 7 5 6 7</code></pre>
+<pre class="r"><code>rep(5:7,each=2) #序列每个元素分别重复2次</code></pre>
+<pre><code>## [1] 5 5 6 6 7 7</code></pre>
+<pre class="r"><code>rep(5:7,each=2,time=2) #序列每个元素分别重复2次，序列重复2次</code></pre>
+<pre><code>##  [1] 5 5 6 6 7 7 5 5 6 6 7 7</code></pre>
+</div>
+</div>
+<div class="section level1">
+<h1>矩阵</h1>
+<p>矩阵内的每个元素拥有相同的模式。</p>
+<div class="section level2">
+<h2>矩阵的创建</h2>
+<p>matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,dimnames = NULL)
+<a href="data:矩阵元素" class="uri">data:矩阵元素</a>
+nrow:行维数
+ncol:列维数
+byrow:FALSE默认表示按行填充，TRUE表示按列填充
+dimnames:用字符向量表示行名和列名</p>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+lanmatrix&lt;-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c(&quot;a1&quot;,&quot;a2&quot;,&quot;a3&quot;),c(&quot;b1&quot;,&quot;b2&quot;)))
+lanmatrix</code></pre>
+<pre><code>##    b1     b2      
+## a1 &quot;雨露&quot; &quot;静静&quot;  
+## a2 &quot;幺妹&quot; &quot;中裤男&quot;
+## a3 &quot;无双&quot; &quot;热血&quot;</code></pre>
+</div>
+<div class="section level2">
+<h2>矩阵转化为向量</h2>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+lanmatrix&lt;-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c(&quot;a1&quot;,&quot;a2&quot;,&quot;a3&quot;),c(&quot;b1&quot;,&quot;b2&quot;)))
+lanvc&lt;-as.vector(lanmatrix)
+lanvc</code></pre>
+<pre><code>## [1] &quot;雨露&quot;   &quot;幺妹&quot;   &quot;无双&quot;   &quot;静静&quot;   &quot;中裤男&quot; &quot;热血&quot;</code></pre>
+</div>
+<div class="section level2">
+<h2>矩阵索引</h2>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+lanmatrix&lt;-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c(&quot;a1&quot;,&quot;a2&quot;,&quot;a3&quot;),c(&quot;b1&quot;,&quot;b2&quot;)))
+lanmatrix[2,1]  #根据位置索引</code></pre>
+<pre><code>## [1] &quot;幺妹&quot;</code></pre>
+<pre class="r"><code>lanmatrix[&quot;a1&quot;,&quot;b1&quot;] #根据行名列名索引</code></pre>
+<pre><code>## [1] &quot;雨露&quot;</code></pre>
+<pre class="r"><code>lanmatrix[&quot;a1&quot;,] #索引行名a1的行</code></pre>
+<pre><code>##     b1     b2 
+## &quot;雨露&quot; &quot;静静&quot;</code></pre>
+<pre class="r"><code>lanmatrix[,&quot;b1&quot;] #索引列名b1的列</code></pre>
+<pre><code>##     a1     a2     a3 
+## &quot;雨露&quot; &quot;幺妹&quot; &quot;无双&quot;</code></pre>
+<pre class="r"><code>lanmatrix[c(2,3),] #索引2，3行</code></pre>
+<pre><code>##    b1     b2      
+## a2 &quot;幺妹&quot; &quot;中裤男&quot;
+## a3 &quot;无双&quot; &quot;热血&quot;</code></pre>
+</div>
+<div class="section level2">
+<h2>矩阵编辑</h2>
+<p>矩阵的操作之中最重要的就是rbind()函数和cbind()函数，前者是纵向拼接，后者是横向拼接矩阵。</p>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+lanmatrix&lt;-matrix(lanshiren,ncol=2,nrow=3,byrow=T,
+                  dimnames = list(c(&quot;a1&quot;,&quot;a2&quot;,&quot;a3&quot;),c(&quot;b1&quot;,&quot;b2&quot;)))
+lanshiren1&lt;-rbind(lanmatrix,c(&quot;道长&quot;,&quot;苹果&quot;))
+lanshiren1</code></pre>
+<pre><code>##    b1     b2      
+## a1 &quot;雨露&quot; &quot;静静&quot;  
+## a2 &quot;幺妹&quot; &quot;中裤男&quot;
+## a3 &quot;无双&quot; &quot;热血&quot;  
+##    &quot;道长&quot; &quot;苹果&quot;</code></pre>
+<pre class="r"><code>lanshiren2&lt;-cbind(lanmatrix,c(&quot;道长&quot;,&quot;苹果&quot;,&quot;吉光&quot;))
+lanshiren2</code></pre>
+<pre><code>##    b1     b2             
+## a1 &quot;雨露&quot; &quot;静静&quot;   &quot;道长&quot;
+## a2 &quot;幺妹&quot; &quot;中裤男&quot; &quot;苹果&quot;
+## a3 &quot;无双&quot; &quot;热血&quot;   &quot;吉光&quot;</code></pre>
+</div>
+<div class="section level2">
+<h2>矩阵运算</h2>
+<pre class="r"><code>a&lt;-c(1,2,3,4,5,2,3,7,10,13,3,5,11,16,21,
+     2,-7,7,7,2,1,4,5,3,10)
+m1&lt;-matrix(a,ncol=5)
+m1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    2    1
+## [2,]    2    3    5   -7    4
+## [3,]    3    7   11    7    5
+## [4,]    4   10   16    7    3
+## [5,]    5   13   21    2   10</code></pre>
+<pre class="r"><code>m2&lt;-matrix(c(25:1),nrow = 5)
+m2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   25   20   15   10    5
+## [2,]   24   19   14    9    4
+## [3,]   23   18   13    8    3
+## [4,]   22   17   12    7    2
+## [5,]   21   16   11    6    1</code></pre>
+<pre class="r"><code>colSums(m1) #各列求和</code></pre>
+<pre><code>## [1] 15 35 56 11 23</code></pre>
+<pre class="r"><code>rowSums(m2) #各行求和</code></pre>
+<pre><code>## [1] 75 70 65 60 55</code></pre>
+<pre class="r"><code>t(m2) #转置</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   25   24   23   22   21
+## [2,]   20   19   18   17   16
+## [3,]   15   14   13   12   11
+## [4,]   10    9    8    7    6
+## [5,]    5    4    3    2    1</code></pre>
+<pre class="r"><code>det(m1) #求解行列式=52</code></pre>
+<pre><code>## [1] 52</code></pre>
+<pre class="r"><code>crossprod(m1,m2) #内积,等价于t(m1)%*% m2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  335  260  185  110   35
+## [2,]  776  601  426  251   76
+## [3,] 1241  961  681  401  121
+## [4,]  239  184  129   74   19
+## [5,]  512  397  282  167   52</code></pre>
+<pre class="r"><code>t(m1)%*% m2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  335  260  185  110   35
+## [2,]  776  601  426  251   76
+## [3,] 1241  961  681  401  121
+## [4,]  239  184  129   74   19
+## [5,]  512  397  282  167   52</code></pre>
+<pre class="r"><code>solve(m1) #逆矩阵</code></pre>
+<pre><code>##            [,1]          [,2]  [,3]        [,4]        [,5]
+## [1,] -1.2692308  1.000000e+00  1.25  0.40384615 -1.01923077
+## [2,] 13.1153846 -2.000000e+00 -4.75 -1.67307692  2.36538462
+## [3,] -7.6923077  1.000000e+00  2.50  1.03846154 -1.19230769
+## [4,] -0.3461538  3.843080e-17  0.25  0.01923077 -0.09615385
+## [5,] -0.1923077  2.135044e-17  0.25 -0.21153846  0.05769231</code></pre>
+<pre class="r"><code>eigen(m1) #特征值，特征向量</code></pre>
+<pre><code>## eigen() decomposition
+## $values
+## [1] 27.9037174  5.5396625 -1.4974916  0.5017930 -0.4476813
+## 
+## $vectors
+##             [,1]       [,2]       [,3]        [,4]        [,5]
+## [1,] -0.12249968  0.1264277 -0.1440866 -0.07716473  0.19889749
+## [2,] -0.07087456 -0.7309475  0.7667466 -0.85158609 -0.84326228
+## [3,] -0.47253944  0.4166401 -0.5681283  0.50891362  0.49705085
+## [4,] -0.51919827  0.4890713  0.1628406  0.07482011 -0.02630154
+## [5,] -0.69793285 -0.1922292  0.2050657  0.06523510 -0.03996509</code></pre>
+</div>
+</div>
+<div class="section level1">
+<h1>数据框</h1>
+<p>数据框不同的列可以包含不同的模式(数值型、字符型，逻辑值型等)。</p>
+<p>数据框所有列的长度必须相同。</p>
+<p>一般列表示属性的所有取值，行表示其中一个样本数据。</p>
+<div class="section level2">
+<h2>创建数据框</h2>
+<pre class="r"><code>a&lt;-c(1,2,3,4,5,2,3,7,10,13,3,5,11,16,21,
+     2,-7,7,7,2,1,4,5,3,10)
+m1&lt;-matrix(a,ncol=5)
+m1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    2    1
+## [2,]    2    3    5   -7    4
+## [3,]    3    7   11    7    5
+## [4,]    4   10   16    7    3
+## [5,]    5   13   21    2   10</code></pre>
+<pre class="r"><code>dt1&lt;-data.frame(m1) #矩阵转化为数据框
+dt1</code></pre>
+<pre><code>##   X1 X2 X3 X4 X5
+## 1  1  2  3  2  1
+## 2  2  3  5 -7  4
+## 3  3  7 11  7  5
+## 4  4 10 16  7  3
+## 5  5 13 21  2 10</code></pre>
+<pre class="r"><code>dt2&lt;-data.frame(t=c(2013,2014,2015,2016,2017,2018),
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+dt2</code></pre>
+<pre><code>##      t sz tmp
+## 1 2013  2  28
+## 2 2014  5  37
+## 3 2015  8  32
+## 4 2016  9  29
+## 5 2017  3  39
+## 6 2018  4  38</code></pre>
+</div>
+<div class="section level2">
+<h2>数据框索引</h2>
+<div class="section level3">
+<h3>列(行)索引</h3>
+<pre class="r"><code>dt2&lt;-data.frame(t=c(2013,2014,2015,2016,2017,2018),
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+
+dt2[,2] #索引第二列</code></pre>
+<pre><code>## [1] 2 5 8 9 3 4</code></pre>
+<pre class="r"><code>dt2$sz #按列名称索引，注意$符号,这种方式很重要</code></pre>
+<pre><code>## [1] 2 5 8 9 3 4</code></pre>
+<pre class="r"><code>dt2[&quot;sz&quot;] #按列名称索引</code></pre>
+<pre><code>##   sz
+## 1  2
+## 2  5
+## 3  8
+## 4  9
+## 5  3
+## 6  4</code></pre>
+<pre class="r"><code>dt2[2:4,] #索引2:4行</code></pre>
+<pre><code>##      t sz tmp
+## 2 2014  5  37
+## 3 2015  8  32
+## 4 2016  9  29</code></pre>
+</div>
+<div class="section level3">
+<h3>元素索引</h3>
+<pre class="r"><code>dt2&lt;-data.frame(t=c(2013,2014,2015,2016,2017,2018),
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+
+dt2[1,2] #索引第一行第二列值</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>dt2[1,][2] #先索引行然后再索引该行第二个值，跟上面一样结果</code></pre>
+<pre><code>##   sz
+## 1  2</code></pre>
+<pre class="r"><code>dt2$sz[1] #按列索引然后再索引该列第一个值</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>dt2[&quot;sz&quot;][[1]] #跟上面一样结果</code></pre>
+<pre><code>## [1] 2 5 8 9 3 4</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>数据框编辑和查看</h2>
+<p>跟之前的矩阵操作有些类似</p>
+<pre class="r"><code>dt2&lt;-data.frame(t=c(2013,2014,2015,2016,2017,2018), 
+                sz=c(2,5,8,9,3,4),tmp=c(28,37,32,29,39,38)) #向量组成数据框
+
+dt2</code></pre>
+<pre><code>##      t sz tmp
+## 1 2013  2  28
+## 2 2014  5  37
+## 3 2015  8  32
+## 4 2016  9  29
+## 5 2017  3  39
+## 6 2018  4  38</code></pre>
+<pre class="r"><code>dt3&lt;-rbind(dt2,c(2019,7,34.5)) #增加一行
+dt3</code></pre>
+<pre><code>##      t sz  tmp
+## 1 2013  2 28.0
+## 2 2014  5 37.0
+## 3 2015  8 32.0
+## 4 2016  9 29.0
+## 5 2017  3 39.0
+## 6 2018  4 38.0
+## 7 2019  7 34.5</code></pre>
+<pre class="r"><code>dt3&lt;-dt3[,-3] #删除一列
+dt3</code></pre>
+<pre><code>##      t sz
+## 1 2013  2
+## 2 2014  5
+## 3 2015  8
+## 4 2016  9
+## 5 2017  3
+## 6 2018  4
+## 7 2019  7</code></pre>
+<pre class="r"><code>dt4&lt;-cbind(dt2,cn=c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;)) #增加一列
+dt4</code></pre>
+<pre><code>##      t sz tmp cn
+## 1 2013  2  28  a
+## 2 2014  5  37  b
+## 3 2015  8  32  c
+## 4 2016  9  29  d
+## 5 2017  3  39  e
+## 6 2018  4  38  f</code></pre>
+<pre class="r"><code>names(dt4) #查看数据框列名</code></pre>
+<pre><code>## [1] &quot;t&quot;   &quot;sz&quot;  &quot;tmp&quot; &quot;cn&quot;</code></pre>
+<pre class="r"><code>names(dt4)[4]=&quot;cnm&quot; #修改数据框列名
+names(dt4) #查看数据框列名</code></pre>
+<pre><code>## [1] &quot;t&quot;   &quot;sz&quot;  &quot;tmp&quot; &quot;cnm&quot;</code></pre>
+<pre class="r"><code>nrow(dt4) #查看行数目</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>ncol(dt4) #查看列数目</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>summary(dt4) #查看数据框概貌</code></pre>
+<pre><code>##        t              sz             tmp        cnm  
+##  Min.   :2013   Min.   :2.000   Min.   :28.00   a:1  
+##  1st Qu.:2014   1st Qu.:3.250   1st Qu.:29.75   b:1  
+##  Median :2016   Median :4.500   Median :34.50   c:1  
+##  Mean   :2016   Mean   :5.167   Mean   :33.83   d:1  
+##  3rd Qu.:2017   3rd Qu.:7.250   3rd Qu.:37.75   e:1  
+##  Max.   :2018   Max.   :9.000   Max.   :39.00   f:1</code></pre>
+</div>
+</div>
+<div class="section level1">
+<h1>列表</h1>
+<p>列表可以把向量，矩阵，数据框甚至列表等整合在一起。</p>
+<pre class="r"><code>a&lt;-c(1,2,3,4,5,2,3,7,10,13,3,5,11,16,21,
+     2,-7,7,7,2,1,4,5,3,10) #向量
+m1&lt;-matrix(a,ncol=5) #矩阵
+dt2&lt;-data.frame(t=c(2013,2014,2015,2016,2017,2018),sz=c(2,5,8,9,3,4)) #数据框
+list1&lt;-list(a=a,m1=m1,dt2=dt2,lanshiren=lanshiren)
+list1</code></pre>
+<pre><code>## $a
+##  [1]  1  2  3  4  5  2  3  7 10 13  3  5 11 16 21  2 -7  7  7  2  1  4  5
+## [24]  3 10
+## 
+## $m1
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    2    1
+## [2,]    2    3    5   -7    4
+## [3,]    3    7   11    7    5
+## [4,]    4   10   16    7    3
+## [5,]    5   13   21    2   10
+## 
+## $dt2
+##      t sz
+## 1 2013  2
+## 2 2014  5
+## 3 2015  8
+## 4 2016  9
+## 5 2017  3
+## 6 2018  4
+## 
+## $lanshiren
+## [1] &quot;雨露&quot;   &quot;静静&quot;   &quot;幺妹&quot;   &quot;中裤男&quot; &quot;无双&quot;   &quot;热血&quot;</code></pre>
+</div>
+<div class="section level1">
+<h1>控制流</h1>
+<div class="section level2">
+<h2>分支语句</h2>
+<div id="ifelse" class="section level3">
+<h3>if/else语句</h3>
+<p>注意else不能单独一行，除非if/else在大括号{}里面。</p>
+<p>if(cond) expr</p>
+<p>if(cond) cons.expr else alt.expr</p>
+<pre class="r"><code>a&lt;-27
+if(a&lt;=28){print(&quot;天气凉爽&quot;)} else  print(&quot;天气热&quot;)</code></pre>
+<pre><code>## [1] &quot;天气凉爽&quot;</code></pre>
+</div>
+<div id="switch" class="section level3">
+<h3>switch语句</h3>
+<p>switch(EXPR, LIST)</p>
+<p>EXPR:表达式</p>
+<p>LIST:</p>
+<p>1,当LIST是字典类型时，表达式等于变量名，返回变量名相应的值。</p>
+<p>2,如果表达式返回值在1到length(LIST)之间，则返回列表相应位置的值。</p>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+switch(&quot;yulu&quot;,yulu=&quot;雨露&quot;,jingjing=&quot;静静&quot;,yaomei=&quot;幺妹&quot;,zhongkunan=&quot;中裤男&quot;) </code></pre>
+<pre><code>## [1] &quot;雨露&quot;</code></pre>
+<pre class="r"><code>a&lt;-c(1,2,3)
+lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+switch(2,a) #相应位置的值为，为NULL
+switch(2,a,lanshiren) #相应位置的值</code></pre>
+<pre><code>## [1] &quot;雨露&quot;   &quot;静静&quot;   &quot;幺妹&quot;   &quot;中裤男&quot; &quot;无双&quot;   &quot;热血&quot;</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>循环语句</h2>
+<div id="for-" class="section level3">
+<h3>for 循环</h3>
+<p>格式:for(name in expr1){expr2}</p>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+for(i in  lanshiren)
+{
+  print(i)
+}</code></pre>
+<pre><code>## [1] &quot;雨露&quot;
+## [1] &quot;静静&quot;
+## [1] &quot;幺妹&quot;
+## [1] &quot;中裤男&quot;
+## [1] &quot;无双&quot;
+## [1] &quot;热血&quot;</code></pre>
+<pre class="r"><code>for(n in c(2,5,10,20,50)) {
+   x &lt;- stats::rnorm(n)
+   cat(n, &quot;: &quot;, sum(x^2), &quot;\n&quot;, sep = &quot;&quot;)
+}</code></pre>
+<pre><code>## 2: 0.07819392
+## 5: 4.825856
+## 10: 9.853164
+## 20: 29.20274
+## 50: 39.0636</code></pre>
+</div>
+<div id="while-" class="section level3">
+<h3>while 循环</h3>
+<p>格式:while(cond){expr}</p>
+<pre class="r"><code>fa&lt;-c(1,1)
+i=3
+while(i &lt;=8)
+{
+  fa[i]&lt;-fa[i-1]+fa[i-2]
+  i&lt;-i+1
+}
+fa</code></pre>
+<pre><code>## [1]  1  1  2  3  5  8 13 21</code></pre>
+</div>
+<div id="repeat-break-" class="section level3">
+<h3>repeat-break 循环</h3>
+<p>repeat是无限循环语句，循环条件很重要。</p>
+<pre class="r"><code>fa&lt;-c(1,1)
+i=3
+repeat
+{
+  fa[i]&lt;-fa[i-1]+fa[i-2]
+  i&lt;-i+1
+  if(i&gt;8) break  #循环条件
+}
+fa</code></pre>
+<pre><code>## [1]  1  1  2  3  5  8 13 21</code></pre>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1>函数</h1>
+<p>函数的定义格式为：
+name&lt;-function(arg1,arg2,…) expression</p>
+<pre class="r"><code># 二分法求解[a,b]区间 函数f的根。
+ff&lt;-function(f,a,b,eps=1e-5){
+  if(f(a)*f(b)&gt;0)
+    list(fail=&quot;finding root is fail !&quot;)
+  else{
+    repeat{
+      if(abs(b-a)&lt;eps) break
+      x&lt;-(a+b)/2
+      if(f(a)*f(x)&lt;=0) b&lt;-x else a&lt;-x #注意，若取&lt;时候最后区间[0,2]有不可思议结果
+    }
+  list(root=(a+b)/2,fun=f(x))
+  }
+}
+f&lt;-function(x) x^3-1
+ff(f,0,3)</code></pre>
+<pre><code>## $root
+## [1] 0.999999
+## 
+## $fun
+## [1] 5.722057e-06</code></pre>
+</div>
+<div class="section level1">
+<h1>字符串操作</h1>
+<p>字符串的操作在后续的爬虫之中是很重要的。</p>
+<div id="subgsub" class="section level2">
+<h2>sub()函数和gsub()函数</h2>
+<p>sub替换第一个满足条件的匹配。</p>
+<p>sub(pattern, replacement, x, ignore.case = FALSE, perl = FALSE,
+fixed = FALSE, useBytes = FALSE)</p>
+<p>gsub替换所有满足条件的匹配。</p>
+<p>gsub(pattern, replacement, x, ignore.case = FALSE, perl = FALSE,
+fixed = FALSE, useBytes = FALSE)</p>
+<pre class="r"><code>st&lt;-c(&quot;aaa&quot;,&quot;bba&quot;,&quot;abcd&quot;)  #字符型向量
+st</code></pre>
+<pre><code>## [1] &quot;aaa&quot;  &quot;bba&quot;  &quot;abcd&quot;</code></pre>
+<pre class="r"><code>st1&lt;-sub(&#39;a&#39;,&#39;l&#39;,st) #替换第一个满足条件的
+st1 </code></pre>
+<pre><code>## [1] &quot;laa&quot;  &quot;bbl&quot;  &quot;lbcd&quot;</code></pre>
+<pre class="r"><code>st2&lt;-gsub(&#39;a&#39;,&#39;l&#39;,st) #替换所有满足条件的
+st2 </code></pre>
+<pre><code>## [1] &quot;lll&quot;  &quot;bbl&quot;  &quot;lbcd&quot;</code></pre>
+</div>
+<div id="strsplit" class="section level2">
+<h2>strsplit()函数</h2>
+<p>字符串拆分</p>
+<p>strsplit(x, split, fixed = FALSE, perl = FALSE, useBytes = FALSE)</p>
+<p>fixed: FALSE则split要为正则表达式。若TRUE则split为文本字符串。</p>
+<pre class="r"><code>st&lt;-c(&quot;2018年4月28日&quot;,&quot;2018年4月29日&quot;)  #字符型向量
+strsplit(st,&quot;年&quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;2018&quot;    &quot;4月28日&quot;
+## 
+## [[2]]
+## [1] &quot;2018&quot;    &quot;4月29日&quot;</code></pre>
+</div>
+<div id="paste" class="section level2">
+<h2>paste()函数</h2>
+<p>在我看来，paste函数是R语言最神奇的函数之一了。用于字符串连接。在解决路径拼接等很有用。</p>
+<p>paste (…, sep = &quot; “, collapse = NULL)</p>
+<p>sep:默认为空格，实际在用中经常改变。</p>
+<p>collapse:若缺省，则返回的是字符型向量。若指定，则连接后的字符串向量用指定值分割连接成字符串。实际操作中此参数比较少用。</p>
+<pre class="r"><code>lanshiren&lt;-c(&quot;雨露&quot;,&quot;静静&quot;,&quot;幺妹&quot;,&quot;中裤男&quot;,&quot;无双&quot;,&quot;热血&quot;)  #字符型向量
+paste(lanshiren,&quot;烂诗人&quot;,1:length(lanshiren),sep=&quot;-&quot;)</code></pre>
+<pre><code>## [1] &quot;雨露-烂诗人-1&quot;   &quot;静静-烂诗人-2&quot;   &quot;幺妹-烂诗人-3&quot;   &quot;中裤男-烂诗人-4&quot;
+## [5] &quot;无双-烂诗人-5&quot;   &quot;热血-烂诗人-6&quot;</code></pre>
+<pre class="r"><code>paste(&quot;E://不R编程小组资料&quot;,&quot;云词.R&quot;,sep = &quot;//&quot;)</code></pre>
+<pre><code>## [1] &quot;E://不R编程小组资料//云词.R&quot;</code></pre>
+</div>
+</div>
+<div class="section level1">
+<h1>数据文件读写</h1>
+<div id="read.csv" class="section level2">
+<h2>read.csv()</h2>
+<p>read.csv(file, header = TRUE, sep = “,”, quote = “&quot;”,
+dec = “.”, fill = TRUE, comment.char = “”, …)</p>
+<pre class="r"><code># file:文件路径名,注意windows下用/或者//来表示路径
+# header:TRUE的时候文件第一行为变量名
+# sep:文件中字段分割符，默认为&quot;,&quot;</code></pre>
+</div>
+<div id="write.csv" class="section level2">
+<h2>write.csv()</h2>
+<p>write.csv(x,file,row.names = TRUE,col.names = TRUE) # 部分参数</p>
+<pre class="r"><code># x:要写入的文件
+# file:写入的文件路径
+# row.names:若不需要行名可以注释掉,col.names一样</code></pre>
+</div>
+</div>
+<div class="section level1">
+<h1>豆瓣爬虫</h1>
+<p>线下结合具体的代码讲解如何抓取豆瓣top250电影。</p>
+<div id="rvest" class="section level2">
+<h2>rvest包</h2>
+<p>%&gt;%是管道操作符，意思是把左边的操作结果作为参数传递给右边的命令</p>
+<p>html_nodes()用于获取网页上的指定节点信息或者元素，确定抓取范围</p>
+<p>html_text()用于提取文本内容</p>
+<p>html_attrs()用于获取链接</p>
+</div>
+<div id="xml2" class="section level2">
+<h2>xml2包</h2>
+<p>若加载rvest包，该过程会自动加载xml2包</p>
+<p>read_html:读取HTML或者XML。</p>
+<p>read_html(x, encoding = “”, …, options = c(“RECOVER”, “NOERROR”,
+“NOBLANKS”))</p>
+</div>
+<div id="stringr" class="section level2">
+<h2>stringr包</h2>
+<p>此包处理字符串功能强大。这次暂时没用到。</p>
+</div>
+</div>
+<div class="section level1">
+<h1>云词</h1>
+<p>具体线下结合例子说明。</p>
+<div id="readlines" class="section level2">
+<h2>readLines</h2>
+<p>readLines(con = stdin(), n = -1L, ok = TRUE, warn = TRUE,
+encoding = “unknown”, skipNul = FALSE)</p>
+<p>可读取txt文件</p>
+</div>
+<div id="jiebar" class="section level2">
+<h2>jiebaR包</h2>
+<div id="work" class="section level3">
+<h3>work()函数</h3>
+<p>分词首先要使用work()函数初始化分词引擎。</p>
+</div>
+<div id="segment" class="section level3">
+<h3>segment()函数</h3>
+<p>绘图有个segments函数，注意不要搞混淆了。分词初始化引擎后，可以用segment()函数进行分词。
+也可以用分词运算符号“&lt;=”</p>
+<p>segment(code, jiebar, mod = NULL)</p>
+<p>code:A Chinese sentence or the path of a text file.</p>
+<p>code为中文句子或者是文本文档路径</p>
+<p>jiebar:jiebaR Worker.</p>
+<p>jiebar为jiebaR分词引擎。</p>
+<p>mod:change default result type, value can be “mix”,“hmm”,“query”,“full”,“level”, or “mp”.</p>
+<p>mod可改变默认的分词引擎，默认是“mix”引擎。</p>
+<pre class="r"><code>library(jiebaR)</code></pre>
+<pre><code>## Warning: 程辑包&#39;jiebaR&#39;是用R版本3.4.4 来建造的</code></pre>
+<pre><code>## 载入需要的程辑包：jiebaRD</code></pre>
+<pre><code>## Warning: 程辑包&#39;jiebaRD&#39;是用R版本3.4.4 来建造的</code></pre>
+<pre class="r"><code>mixworker&lt;-worker()
+zju&lt;-&quot;浙江大学，简称浙大，坐落于素有“人间天堂”美誉的历史文化名城杭州。
+前身是1897年创建的求是书院，是中国人自己最早创办的现代高等学府之一。&quot;
+mixworker &lt;= zju  #分词运算符号&quot;&lt;=&quot;</code></pre>
+<pre><code>##  [1] &quot;浙江大学&quot; &quot;简称&quot;     &quot;浙大&quot;     &quot;坐落于&quot;   &quot;素有&quot;     &quot;人间天堂&quot;
+##  [7] &quot;美誉&quot;     &quot;的&quot;       &quot;历史&quot;     &quot;文化名城&quot; &quot;杭州&quot;     &quot;前身&quot;    
+## [13] &quot;是&quot;       &quot;1897&quot;     &quot;年&quot;       &quot;创建&quot;     &quot;的&quot;       &quot;求&quot;      
+## [19] &quot;是&quot;       &quot;书院&quot;     &quot;是&quot;       &quot;中国&quot;     &quot;人&quot;       &quot;自己&quot;    
+## [25] &quot;最早&quot;     &quot;创办&quot;     &quot;的&quot;       &quot;现代&quot;     &quot;高等学府&quot; &quot;之一&quot;</code></pre>
+<pre class="r"><code>segment(zju,mixworker) #与上面结果一样</code></pre>
+<pre><code>##  [1] &quot;浙江大学&quot; &quot;简称&quot;     &quot;浙大&quot;     &quot;坐落于&quot;   &quot;素有&quot;     &quot;人间天堂&quot;
+##  [7] &quot;美誉&quot;     &quot;的&quot;       &quot;历史&quot;     &quot;文化名城&quot; &quot;杭州&quot;     &quot;前身&quot;    
+## [13] &quot;是&quot;       &quot;1897&quot;     &quot;年&quot;       &quot;创建&quot;     &quot;的&quot;       &quot;求&quot;      
+## [19] &quot;是&quot;       &quot;书院&quot;     &quot;是&quot;       &quot;中国&quot;     &quot;人&quot;       &quot;自己&quot;    
+## [25] &quot;最早&quot;     &quot;创办&quot;     &quot;的&quot;       &quot;现代&quot;     &quot;高等学府&quot; &quot;之一&quot;</code></pre>
+<pre class="r"><code>dt=(mixworker &lt;= zju)  #分词运算符号&quot;&lt;=&quot;
+dt</code></pre>
+<pre><code>##  [1] &quot;浙江大学&quot; &quot;简称&quot;     &quot;浙大&quot;     &quot;坐落于&quot;   &quot;素有&quot;     &quot;人间天堂&quot;
+##  [7] &quot;美誉&quot;     &quot;的&quot;       &quot;历史&quot;     &quot;文化名城&quot; &quot;杭州&quot;     &quot;前身&quot;    
+## [13] &quot;是&quot;       &quot;1897&quot;     &quot;年&quot;       &quot;创建&quot;     &quot;的&quot;       &quot;求&quot;      
+## [19] &quot;是&quot;       &quot;书院&quot;     &quot;是&quot;       &quot;中国&quot;     &quot;人&quot;       &quot;自己&quot;    
+## [25] &quot;最早&quot;     &quot;创办&quot;     &quot;的&quot;       &quot;现代&quot;     &quot;高等学府&quot; &quot;之一&quot;</code></pre>
+</div>
+</div>
+<div id="wordcloud2" class="section level2">
+<h2>wordcloud2包</h2>
+<p>注意直接用 install.packages() 有问题，要用下面的安装：</p>
+<p>devtools::install_github(“lchiffon/wordcloud2”)。</p>
+<p>因此要先装devtools包。</p>
+<div id="wordcloud2" class="section level3">
+<h3>wordcloud2()函数</h3>
+<p>wordcloud2(data, size = 1, minSize = 0, gridSize = 0,
+fontFamily = ‘Segoe UI’, fontWeight = ‘bold’,
+color = ‘random-dark’, backgroundColor = “white”,
+minRotation = -pi/4, maxRotation = pi/4, shuffle = TRUE,
+rotateRatio = 0.4, shape = ‘circle’, ellipticity = 0.65,
+widgetsize = NULL, figPath = NULL, hoverFunction = NULL)</p>
+<p>常用参数：</p>
+<p>（1）data：词云生成数据，包含具体词语以及频率；</p>
+<p>（2）size：字体大小，默认为1，一般来说该值越小，生成的形状轮廓越明显；</p>
+<p>（3）fontFamily：字体，如‘微软雅黑’；</p>
+<p>（4）fontWeight：字体粗细，包含‘normal’，‘bold’以及‘600’;</p>
+<p>（5）color：字体颜色，可以选择‘random-dark’以及‘random-light’，其实就是颜色色系；</p>
+<p>（6）backgroundColor：背景颜色，支持R语言中的常用颜色，如‘gray’，‘blcak’，但是还支持不了更加具体的颜色选择，如‘gray20’；</p>
+<p>（7）minRontatin与maxRontatin：字体旋转角度范围的最小值以及最大值，选定后，字体会在该范围内随机旋转；</p>
+<p>（8）rotationRation：字体旋转比例，如设定为1，则全部词语都会发生旋转；</p>
+<p>（9）shape：词云形状选择，默认是‘circle’，即圆形。还可以选择‘cardioid’（苹果形或心形），‘star’（星形），‘diamond’（钻石），‘triangle-forward’（三角形），‘triangle’（三角形），‘pentagon’（五边形）。</p>
+<pre class="r"><code>library(wordcloud2) 
+
+wordcloud2(demoFreq, size = 1,shape = &#39;star&#39;)   # 星星图
+
+wordcloud2(demoFreqC, size = 2, fontFamily = &quot;微软雅黑&quot;,  
+           color = &quot;random-light&quot;, backgroundColor = &quot;grey&quot;)  #中文词云
+
+wordcloud2(demoFreqC, size = 1,color = &#39;random-light&#39;,  
+backgroundColor = &quot;gray&quot;, fontWeight=&#39;bold&#39;,fontFamily = &quot;微软雅黑&quot;,  
+minRotation = -pi/3, maxRotation = pi/3,rotateRatio = 0.8)  #中文词云
+#设定字体为粗体，字体旋转角度在正负60度之间，旋转比例为80%</code></pre>
+</div>
+<div id="lettercloud" class="section level3">
+<h3>letterCloud()函数</h3>
+<p>letterCloud(data, word, wordSize = 0, letterFont = NULL, …)</p>
+<pre class="r"><code>#data:为需要用的词语以及词频数据
+
+#word:是需要可视化的文字 </code></pre>
+<pre class="r"><code>library(wordcloud2) 
+letterCloud(demoFreq,&quot;R&quot;)</code></pre>
+</div>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

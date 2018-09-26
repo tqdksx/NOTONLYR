@@ -1,0 +1,134 @@
+
+
+# 输入：缺项被填补的数据X（data_without_missing_value.csv），患者诊断结果y（target.csv），患者时间线（timeline.csv）
+# 输出：带完整时间线的数据X（full_data.csv），带完整时间线的诊断结果y（full_target.csv）
+# 功能：将时间线按每小时扩充
+# 
+
+
+rm(list=ls())
+
+# This notebook is the 3rd step, which fills the full timeline of a patient.
+
+timeline = read.csv('E://医惠科技//脓毒血症//sepsis-prediction-R//data//timeline.csv',fileEncoding='UTF-8',stringsAsFactors=F)
+#timeline数据一致
+head(timeline)
+
+
+data = read.csv('E://医惠科技//脓毒血症//sepsis-prediction-R//data/data_without_missing_value_R.csv',stringsAsFactors=F)
+#由于第2步的原因，开始data数据就有所相差
+head(data)
+
+nrow(data)
+
+data[which(data$住院流水号=='2017-01159418-0'),]
+
+
+target = read.csv('E://医惠科技//脓毒血症//sepsis-prediction-R//data//target.csv', fileEncoding='UTF-8',stringsAsFactors=F)
+#target数据一致
+head(target)
+
+
+##下面对timeline  data  和 target 按照 住院流水号和时间戳进行排序
+
+timeline=timeline[order(timeline$住院流水号,timeline$时间戳),]
+
+data=data[order(data$住院流水号,data$时间戳),]
+
+target=target[order(target$住院流水号,target$时间戳),]
+
+
+pd= data[1,]
+full_data = pd[-1,]
+pd[1,]=NA
+
+
+pt = target[1,]
+full_target = pt[-1,]
+pt[1,]=NA
+
+patient_ids=unique(timeline$住院流水号)
+
+n_patient = 0
+
+###补充中间缺失的值
+for(patient_id in patient_ids)
+{
+ # patient_id=patient_ids[1]
+  patient_timeline=timeline[which(timeline$住院流水号==patient_id),]
+  patient_data = data[which(data$住院流水号== patient_id),]
+  patient_target = target[which(target$住院流水号== patient_id),]
+  
+  
+  for(i in 1:nrow(patient_timeline))
+  {
+    
+    if(i==1){
+      pre_time=patient_timeline[i,c('时间戳')]
+    }else{
+      cur_time =patient_timeline[i,c('时间戳')]
+      time_diff=cur_time-pre_time
+      if(time_diff>=2)
+      {
+       
+        fd=pd
+        ft=pt
+        for(jj in 1:(ceiling(log2(time_diff))))
+        {
+          fd=rbind(fd,fd)
+          ft=rbind(ft,ft)
+        }
+        
+        fd=fd[1:(time_diff-1),]
+        ft=ft[1:(time_diff-1),]
+        ihn=rep(patient_id,(time_diff-1))
+        tl=(pre_time+1):(pre_time + time_diff-1)
+        fd$住院流水号=ihn
+        fd$时间戳=tl
+        ft$住院流水号=ihn
+        ft$时间戳=tl
+        
+        full_data = rbind(full_data,fd)  
+        
+        full_target = rbind(full_target,ft)  
+        
+        #full_target = rbind(full_target,data.frame(住院流水号=patient_id,时间戳=pre_time + t))  
+        
+      }
+      pre_time = cur_time
+    }
+    
+  
+    full_data = rbind(full_data,patient_data[i,])
+   
+    full_target = rbind(full_target,patient_target[i,])
+    
+    
+  }
+  
+  
+  n_patient = n_patient+1
+  
+  if(n_patient %% 5 == 0)
+  {
+    
+    print(paste("Processed",n_patient,"patients",sep=" "))
+    
+  }
+  
+}
+
+
+
+
+head(full_data)
+
+nrow(full_data)
+nrow(full_target)
+
+
+# Save data to the storage
+write.csv(full_data,'E://医惠科技//脓毒血症//sepsis-prediction-R//data///full_data_R.csv', row.names=F)
+write.csv(full_target,'E://医惠科技//脓毒血症//sepsis-prediction-R//data///full_target_R.csv', row.names=F)
+
+
